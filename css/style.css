@@ -1,0 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* Background glow */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(255,182,193,.15), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,192,203,.15), transparent 50%);
+    z-index: 0;
+}
+
+.bg-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Floating hearts */
+.floating-hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 30px;
+    opacity: .6;
+    animation: floatUp 8s infinite ease-in;
+}
+
+.floating-heart:nth-child(1){left:5%;animation-delay:0s;}
+.floating-heart:nth-child(2){left:20%;animation-delay:2s;}
+.floating-heart:nth-child(3){left:40%;animation-delay:4s;}
+.floating-heart:nth-child(4){left:60%;animation-delay:1s;}
+.floating-heart:nth-child(5){left:75%;animation-delay:3s;}
+.floating-heart:nth-child(6){left:90%;animation-delay:5s;}
+
+@keyframes floatUp{
+    0%{bottom:-50px;opacity:0}
+    10%,90%{opacity:.6}
+    100%{bottom:100vh;opacity:0}
+}
+
+/* Roses */
+.decorative-roses {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.rose {
+    position: absolute;
+    font-size: 35px;
+    animation: sway 4s ease-in-out infinite;
+}
+
+.rose:nth-child(1){top:10%;left:5%;}
+.rose:nth-child(2){top:20%;right:8%;}
+.rose:nth-child(3){bottom:15%;left:10%;}
+.rose:nth-child(4){bottom:25%;right:5%;}
+.rose:nth-child(5){top:50%;right:3%;}
+
+@keyframes sway{
+    0%,100%{transform:translateY(0) rotate(-5deg)}
+    50%{transform:translateY(-15px) rotate(5deg)}
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 60px 20px 40px;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: auto;
+    background: rgba(255,255,255,.1);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.7em;
+}
+
+.subtitle {
+    opacity: .95;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+/* Card layout */
+.card-section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 100px;
+}
+
+.card-section.left { flex-direction: row-reverse; }
+
+.card-container {
+    flex: 0 0 320px;
+    perspective: 1200px; /* ✅ TAMBAHAN PENTING */
+}
+
+.photo-placeholder {
+    flex: 0 0 260px;
+    height: 340px;
+}
+
+.photo-slot {
+    width:100%;
+    height:100%;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.photo-slot img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* Card flip */
+.card {
+    width:100%;
+    height:340px;
+    position:relative;
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d; /* ✅ FIX SAFARI */
+    transition:transform .7s;
+    cursor:pointer;
+    will-change: transform; /* ✅ SMOOTH */
+}
+
+.card.open { 
+    transform:rotateY(180deg); 
+}
+
+.card-front,
+.card-inside {
+    position:absolute;
+    inset:0;
+    border-radius:15px;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden; /* ✅ FIX SAFARI */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* layering fix */
+.card-front{ z-index:2; }
+.card-inside{ z-index:1; }
+
+.card-front {
+    background:linear-gradient(135deg,#ff6b9d,#c44569);
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.card-inside {
+    background:linear-gradient(135deg,#fff9e6,#fff0f5);
+    color:#333;
+    transform:rotateY(180deg);
+    padding:25px;
+    text-align:center;
+}
+
+.card-front h1 {
+    font-size:60px;
+}
+
+.instruction {
+    letter-spacing:2px;
+    opacity:.9;
+}
+
+/* Text */
+.card-inside p {
+    line-height:1.8;
+    margin-bottom:12px;
+}
+
+strong {
+    font-family:'Dancing Script',cursive;
+    font-size:1.2em;
+    color:#ff6b9d;
+}
+
+/* Fade text */
+.fade-in{
+    opacity:0;
+}
+
+/* animasi saat dibuka */
+.card.open .fade-in{
+    animation:fadeIn .8s forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* Footer */
+.footer {
+    text-align:center;
+    padding:50px 20px;
+}
+
+.gallery-btn {
+    display:inline-block;
+    padding:15px 40px;
+    border-radius:50px;
+    background:rgba(255,255,255,.2);
+    color:white;
+    text-decoration:none;
+    margin-top:20px;
+    border:2px solid rgba(255,255,255,.4);
+}
+
+.gallery-btn:hover {
+    background:rgba(255,255,255,.3);
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .card-section{
+        flex-direction:column !important;
+        gap:25px;
+    }
+
+    .card-container,
+    .photo-placeholder{
+        width:100%;
+        max-width:350px;
+    }
+}
+
+@media(max-width:500px){
+    .title{font-size:1.7em}
+    .card{height:260px}
+    .photo-placeholder{height:250px}
+}

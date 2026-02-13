@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Foto & Video - Happy Valentine's Day</title>
+    <link rel="stylesheet" href="css/gallery-style.css">
+</head>
+<body>
+    <div class="gallery-bg-container">
+        <!-- Background decoration -->
+        <div class="floating-hearts gallery-hearts">
+            <div class="floating-heart">❤️</div>
+            <div class="floating-heart">💕</div>
+            <div class="floating-heart">💗</div>
+            <div class="floating-heart">💖</div>
+            <div class="floating-heart">💝</div>
+        </div>
+
+        <!-- Gallery Header -->
+        <header class="gallery-header">
+            <div class="header-top">
+                <a href="index.html" class="back-btn">← Kembali ke Kartu Ucapan</a>
+            </div>
+            <div class="gallery-header-content">
+                <h1 class="gallery-title">Koleksi Foto & Video Spesial 📸💕</h1>
+                <p class="gallery-subtitle">You, Me and the world</p>
+            </div>
+        </header>
+
+        <!-- Filter buttons -->
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">
+                📸 Semua (97)
+            </button>
+            <button class="filter-btn" data-filter="photo">
+                🖼️ Foto (63)
+            </button>
+            <button class="filter-btn" data-filter="video">
+                🎬 Video (34)
+            </button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-container">
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items akan di-generate oleh JavaScript -->
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state">
+                <p>Belum ada foto atau video ditambahkan</p>
+            </div>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-content">
+                <div class="lightbox-media" id="lightboxMedia">
+                    <!-- Media akan di-load di sini -->
+                </div>
+                <button class="lightbox-close" id="lightboxClose">&times;</button>
+                <button class="lightbox-prev" id="lightboxPrev">❮</button>
+                <button class="lightbox-next" id="lightboxNext">❯</button>
+                <div class="lightbox-counter" id="lightboxCounter"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="gallery-footer">
+            <p>💞 Setiap momen bersama adalah kenangan berharga 💞</p>
+            <p>And again, I will never get tired of saying</p>
+            <p>"Bumi ini luas sekali, tapi untungnya kita ketemu."</p>
+            <p>— 3726 mdpl, -Rangga Raja</p>
+        </footer>
+    </div>
+
+    <script src="js/gallery-script.js"></script>
+    <audio id="galleryAudio" loop preload="auto" src="assets/sounds/open.mp3"></audio>
+    <script>
+        // try autoplaying gallery audio when the user interacts or on load
+        document.addEventListener('DOMContentLoaded', function(){
+            const a = document.getElementById('galleryAudio');
+            if(!a) return;
+            a.volume = 0.8;
+            a.play().catch(()=>{
+                // autoplay may be blocked; try again on first click
+                const resume = () => { a.play().catch(()=>{}); document.removeEventListener('click', resume); };
+                document.addEventListener('click', resume);
+            });
+        });
+    </script>
+</body>
+</html>
