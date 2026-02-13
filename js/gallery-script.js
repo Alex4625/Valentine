@@ -11,201 +11,107 @@ const imageFiles = [
     "6.jpg","60.jpg","61.jpg","62.jpg","63.jpg","7.jpg","8.jpg","9.jpg"
 ];
 
-const videoFiles = [
-    "01.mp4","010.mp4","011.mp4","012.mp4","013.mp4","014.mp4","015.mp4","016.mp4","017.mp4","018.mp4","019.mp4",
-    "02.mp4","020.mp4","021.mp4","022.mp4","023.mp4","024.mp4","025.mp4","026.mp4","027.mp4","028.mp4","029.mp4",
-    "03.mp4","030.mp4","031.mp4","032.mp4","04.mp4","05.mp4","06.mp4","07.mp4","08.mp4","09.mp4","33.mp4","34.mp4"
-];
 
-function extractNumber(name) {
-    const m = name.match(/(\d+)/);
-    return m ? parseInt(m[0], 10) : 0;
+// ====== GOOGLE DRIVE LINKS ======
+const videoLinks = {
+"01.mp4":"https://drive.google.com/uc?export=view&id=1Y9Vf3bCoB9fHYh4MZZTtnWUeTKySrk26",
+"02.mp4":"https://drive.google.com/uc?export=view&id=1_eFlicJvvQzT4VGWKDP1mTz4dRxSgdTD",
+"03.mp4":"https://drive.google.com/uc?export=view&id=19Gkc3D5m6mORT9_sot0_j05qoAEwlK-C",
+"04.mp4":"https://drive.google.com/uc?export=view&id=1hvRHZp9hOajEDoWR6xIqjwa0HQ8uHIGU",
+"05.mp4":"https://drive.google.com/uc?export=view&id=1Cf9htqYM-GKxhkr05eg288_eCrXQK4hQ",
+"06.mp4":"https://drive.google.com/uc?export=view&id=1tcrRh9cLaG2p1d8SXjdU-jxq8lVBT-Br",
+"07.mp4":"https://drive.google.com/uc?export=view&id=1We4LyjBtRen5sOEdG1aK9Ihjv9u7e5iV",
+"08.mp4":"https://drive.google.com/uc?export=view&id=1o4_6-gXuhA9ZBh1bT7uZAGceHo2M9iXQ",
+"09.mp4":"https://drive.google.com/uc?export=view&id=1NbICd0CydpR-jG8GtP4oG5Yl1z0lYR_C",
+"010.mp4":"https://drive.google.com/uc?export=view&id=1SmkcHglGP_xV9VYAZIe9Rq4U8Uv0yRpj",
+"011.mp4":"https://drive.google.com/uc?export=view&id=1TuLcwr5BF63zrIJ409iXU7tfEsd90OLM",
+"012.mp4":"https://drive.google.com/uc?export=view&id=1BpNxcyYb5FLMQuJWRXPHDTOalEz_sOcK",
+"013.mp4":"https://drive.google.com/uc?export=view&id=1QupFxdK6NxwVTfCN7FZ4eOG4qwDMHDMv",
+"014.mp4":"https://drive.google.com/uc?export=view&id=12sK6pxZHQq59TJi3xXBCNMVlK2Ce1Fxo",
+"015.mp4":"https://drive.google.com/uc?export=view&id=1pgcooVd7FP_0gWn6YC1LauCQEHAZnq7d",
+"016.mp4":"https://drive.google.com/uc?export=view&id=1giw77v4r74Bk7nGw1vUAbV9wEJ2U-oVP",
+"017.mp4":"https://drive.google.com/uc?export=view&id=17lD8hw8ubdFgG2sFlRPtP9miMqYT2bAl",
+"018.mp4":"https://drive.google.com/uc?export=view&id=1h5ZELQkS8tr_kfsCssBBdDDh-vuGz3gL",
+"019.mp4":"https://drive.google.com/uc?export=view&id=1veEMLPlvLusYXte4cNkJlqm0-emCZTW4",
+"020.mp4":"https://drive.google.com/uc?export=view&id=1bBoosE8JCCvHGaCEmPLK27a1lAAEjnPS",
+"021.mp4":"https://drive.google.com/uc?export=view&id=16p9IHEXoiUuikilTtjXV9UEgcL8w42gW",
+"022.mp4":"https://drive.google.com/uc?export=view&id=13u9PyJ6l8VSBmTBlbTvwFbZUDmGj6BWn",
+"023.mp4":"https://drive.google.com/uc?export=view&id=1bD01IqzmVeDnMhMYQXhBGWvZW5t2_6Vv",
+"024.mp4":"https://drive.google.com/uc?export=view&id=1jFoNgoddVoiVI1lr479dWefCTEpCBuSy",
+"025.mp4":"https://drive.google.com/uc?export=view&id=1fypYFeZk4kdKErVpHB7pHTZ1psmfcgAW",
+"026.mp4":"https://drive.google.com/uc?export=view&id=13RbjbUyzKzXlXcc5jzDf5oGcQgNRBNPO",
+"027.mp4":"https://drive.google.com/uc?export=view&id=1T51hhi64LU4BnXvNX-bTJJvyj_GVHhpB",
+"028.mp4":"https://drive.google.com/uc?export=view&id=1JxBPEDgk5UlcNbKY8Y2bdygmQ34G8WrV",
+"029.mp4":"https://drive.google.com/uc?export=view&id=1ccUV3lGOR0tbZlEnw2ybJDIxLXspzgaC",
+"030.mp4":"https://drive.google.com/uc?export=view&id=1EGxSRSxLpRzuiFPLS9ly7WhVNFBhl7VA",
+"031.mp4":"https://drive.google.com/uc?export=view&id=1BvfOSnTaVJauTeN62i7Ryoq9D75rs28h",
+"032.mp4":"https://drive.google.com/uc?export=view&id=1nKRQhPeIarb7oBoFcs764fhAxFeymVFJ",
+"33.mp4":"https://drive.google.com/uc?export=view&id=1IO35m0hq4OfpArlae3YQFPuKqiQoVjaK",
+"34.mp4":"https://drive.google.com/uc?export=view&id=1Qz791VFvRhKWnDkCsmUG_aKMv3RtabEQ"
+};
+
+function extractNumber(name){
+    const m=name.match(/(\d+)/);
+    return m?parseInt(m[0],10):0;
 }
 
-imageFiles.sort((a, b) => extractNumber(a) - extractNumber(b));
-videoFiles.sort((a, b) => extractNumber(a) - extractNumber(b));
+imageFiles.sort((a,b)=>extractNumber(a)-extractNumber(b));
+videoFiles.sort((a,b)=>extractNumber(a)-extractNumber(b));
 
-for (let i = 0; i < imageFiles.length; i++) {
-    const file = imageFiles[i];
+for(let i=0;i<imageFiles.length;i++){
+    const file=imageFiles[i];
     galleryData.push({
-        id: i + 1,
-        type: 'photo',
-        title: `Foto ${i + 1}`,
-        src: `images/${file}`,
-        thumb: `images/${file}`
+        id:i+1,
+        type:'photo',
+        title:`Foto ${i+1}`,
+        src:`images/${file}`,
+        thumb:`images/${file}`
     });
 }
 
-for (let i = 0; i < videoFiles.length; i++) {
-    const file = videoFiles[i];
-    const base = file.replace(/\.[^/.]+$/, '');
+for(let i=0;i<videoFiles.length;i++){
+    const file=videoFiles[i];
+    const base=file.replace(/\.[^/.]+$/,'');
     galleryData.push({
-        id: imageFiles.length + i + 1,
-        type: 'video',
-        title: `Video ${i + 1}`,
-        src: `videos/${file}`,
-        thumb: `images/${base}-thumb.jpg`
+        id:imageFiles.length+i+1,
+        type:'video',
+        title:`Video ${i+1}`,
+        src:videoLinks[file],
+        thumb:`images/${base}-thumb.jpg`
     });
 }
 
-let filteredData = [...galleryData];
-let currentLightboxIndex = 0;
+let filteredData=[...galleryData];
+let currentLightboxIndex=0;
 
-// Initialize gallery saat dokumen siap
-document.addEventListener('DOMContentLoaded', function() {
-
+document.addEventListener('DOMContentLoaded',function(){
     renderGallery();
     setupEventListeners();
-
-    // ====== 🎵 AUDIO FIX (TAMBAHAN) ======
-    const audio = document.getElementById("galleryAudio");
-
-    if(!audio) return;
-
-    audio.volume = 0.7;
-
-    // lanjut dari waktu terakhir
-    const savedTime = localStorage.getItem("musicTime");
-    if(savedTime){
-        audio.currentTime = savedTime;
-    }
-
-    // simpan waktu lagu
-    setInterval(()=>{
-        localStorage.setItem("musicTime", audio.currentTime);
-    },1000);
-
-    // autoplay trick
-    audio.muted = true;
-
-    audio.play().then(()=>{
-        audio.muted = false;
-    }).catch(()=>{
-        const resume = () => {
-            audio.play().catch(()=>{});
-            document.removeEventListener("click", resume);
-        };
-        document.addEventListener("click", resume);
-    });
-
 });
-// ====== END AUDIO FIX ======
 
-// Render gallery items
-function renderGallery() {
-    const galleryGrid = document.getElementById('galleryGrid');
-    const emptyState = document.querySelector('.empty-state');
-    
-    galleryGrid.innerHTML = '';
-    
-    if (filteredData.length === 0) {
-        emptyState.style.display = 'block';
-        return;
-    }
-    
-    emptyState.style.display = 'none';
-    
-    filteredData.forEach((item, index) => {
-        const galleryItem = createGalleryItem(item, index);
-        galleryGrid.appendChild(galleryItem);
-    });
+// ====== LIGHTBOX VIDEO FIX ======
+function openLightbox(index){
+    currentLightboxIndex=index;
+    const item=filteredData[index];
+
+    const mediaHTML=item.type==='video'
+        ? `<video src="${item.src}" controls autoplay muted playsinline></video>`
+        : `<img src="${item.src}">`;
+
+    document.getElementById('lightboxMedia').innerHTML=mediaHTML;
+    document.getElementById('lightbox').classList.add('active');
 }
 
-function createGalleryItem(item, index) {
-    const div = document.createElement('div');
-    div.className = 'gallery-item';
-    div.dataset.index = index;
+function navigateLightbox(dir){
+    let i=currentLightboxIndex+dir;
+    if(i<0)i=filteredData.length-1;
+    if(i>=filteredData.length)i=0;
+    currentLightboxIndex=i;
 
-    const mediaElement = `<img src="${item.thumb}" alt="${item.title}" loading="lazy">`;
-    const icon = item.type === 'video' ? '▶️' : '📷';
+    const item=filteredData[i];
+    const mediaHTML=item.type==='video'
+        ? `<video src="${item.src}" controls autoplay muted playsinline></video>`
+        : `<img src="${item.src}">`;
 
-    div.innerHTML = `
-        ${mediaElement}
-        <div class="gallery-item-overlay">${icon}</div>
-    `;
-
-    div.addEventListener('click', () => openLightbox(index));
-    return div;
-}
-
-function setupEventListeners() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            const filter = this.dataset.filter;
-
-            if (filter === 'all') {
-                filteredData = [...galleryData];
-            } else {
-                filteredData = galleryData.filter(item => item.type === filter);
-            }
-
-            renderGallery();
-        });
-    });
-
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-    document.getElementById('lightboxPrev').addEventListener('click', () => navigateLightbox(-1));
-    document.getElementById('lightboxNext').addEventListener('click', () => navigateLightbox(1));
-
-    document.addEventListener('keydown', function(e) {
-        if (document.getElementById('lightbox').classList.contains('active')) {
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') navigateLightbox(-1);
-            if (e.key === 'ArrowRight') navigateLightbox(1);
-        }
-    });
-
-    const lightbox = document.getElementById('lightbox');
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === this) closeLightbox();
-    });
-}
-
-function openLightbox(index) {
-    currentLightboxIndex = index;
-
-    const item = filteredData[index];
-    const lightbox = document.getElementById('lightbox');
-    const lightboxMedia = document.getElementById('lightboxMedia');
-    const lightboxCounter = document.getElementById('lightboxCounter');
-
-    let mediaHTML = item.type === 'video'
-        ? `<video src="${item.src}" controls autoplay></video>`
-        : `<img src="${item.src}" alt="${item.title}">`;
-
-    lightboxMedia.innerHTML = mediaHTML;
-    lightboxCounter.textContent = `${index + 1} / ${filteredData.length}`;
-
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-function navigateLightbox(direction) {
-    let newIndex = currentLightboxIndex + direction;
-
-    if (newIndex < 0) newIndex = filteredData.length - 1;
-    if (newIndex >= filteredData.length) newIndex = 0;
-
-    currentLightboxIndex = newIndex;
-
-    const item = filteredData[newIndex];
-    const lightboxMedia = document.getElementById('lightboxMedia');
-    const lightboxCounter = document.getElementById('lightboxCounter');
-
-    let mediaHTML = item.type === 'video'
-        ? `<video src="${item.src}" controls autoplay></video>`
-        : `<img src="${item.src}" alt="${item.title}">`;
-
-    lightboxMedia.innerHTML = mediaHTML;
-    lightboxCounter.textContent = `${newIndex + 1} / ${filteredData.length}`;
+    document.getElementById('lightboxMedia').innerHTML=mediaHTML;
 }

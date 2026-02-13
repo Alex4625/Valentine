@@ -6,8 +6,10 @@
     <title>Koleksi Foto & Video - Happy Valentine's Day</title>
     <link rel="stylesheet" href="css/gallery-style.css">
 </head>
+
 <body>
     <div class="gallery-bg-container">
+
         <!-- Background decoration -->
         <div class="floating-hearts gallery-hearts">
             <div class="floating-heart">❤️</div>
@@ -22,6 +24,7 @@
             <div class="header-top">
                 <a href="index.html" class="back-btn">← Kembali ke Kartu Ucapan</a>
             </div>
+
             <div class="gallery-header-content">
                 <h1 class="gallery-title">Koleksi Foto & Video Spesial 📸💕</h1>
                 <p class="gallery-subtitle">You, Me and the world</p>
@@ -30,24 +33,15 @@
 
         <!-- Filter buttons -->
         <div class="gallery-filters">
-            <button class="filter-btn active" data-filter="all">
-                📸 Semua (97)
-            </button>
-            <button class="filter-btn" data-filter="photo">
-                🖼️ Foto (63)
-            </button>
-            <button class="filter-btn" data-filter="video">
-                🎬 Video (34)
-            </button>
+            <button class="filter-btn active" data-filter="all">📸 Semua</button>
+            <button class="filter-btn" data-filter="photo">🖼️ Foto</button>
+            <button class="filter-btn" data-filter="video">🎬 Video</button>
         </div>
 
         <!-- Gallery Grid -->
         <div class="gallery-container">
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items akan di-generate oleh JavaScript -->
-            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
 
-            <!-- Empty state -->
             <div class="empty-state">
                 <p>Belum ada foto atau video ditambahkan</p>
             </div>
@@ -56,12 +50,12 @@
         <!-- Lightbox Modal -->
         <div class="lightbox" id="lightbox">
             <div class="lightbox-content">
-                <div class="lightbox-media" id="lightboxMedia">
-                    <!-- Media akan di-load di sini -->
-                </div>
+                <div class="lightbox-media" id="lightboxMedia"></div>
+
                 <button class="lightbox-close" id="lightboxClose">&times;</button>
                 <button class="lightbox-prev" id="lightboxPrev">❮</button>
                 <button class="lightbox-next" id="lightboxNext">❯</button>
+
                 <div class="lightbox-counter" id="lightboxCounter"></div>
             </div>
         </div>
@@ -73,22 +67,31 @@
             <p>"Bumi ini luas sekali, tapi untungnya kita ketemu."</p>
             <p>— 3726 mdpl, -Rangga Raja</p>
         </footer>
+
     </div>
 
+    <!-- Script Gallery -->
     <script src="js/gallery-script.js"></script>
-    <audio id="galleryAudio" loop preload="auto" src="assets/sounds/open.mp3"></audio>
+
+    <!-- Audio -->
+    <audio id="galleryAudio" loop preload="metadata" src="assets/sounds/open.mp3"></audio>
+
     <script>
-        // try autoplaying gallery audio when the user interacts or on load
         document.addEventListener('DOMContentLoaded', function(){
             const a = document.getElementById('galleryAudio');
             if(!a) return;
+
             a.volume = 0.8;
+
             a.play().catch(()=>{
-                // autoplay may be blocked; try again on first click
-                const resume = () => { a.play().catch(()=>{}); document.removeEventListener('click', resume); };
+                const resume = () => {
+                    a.play().catch(()=>{});
+                    document.removeEventListener('click', resume);
+                };
                 document.addEventListener('click', resume);
             });
         });
     </script>
+
 </body>
 </html>
